@@ -17,8 +17,13 @@ let defaultOptions = {
 
 
 const sendMessage = async ({type, message}) =>{
-    let  options = { ...{}, ...defaultOptions, ...{ text: ""+ type +"\n```" + message + "```" } }
+    let  options = { ...{}, ...defaultOptions, ...{ text: message } }
     let data = {}
+
+    console.log('====================================');
+    console.log(options);
+    console.log('====================================');
+
     slack.api('chat.postMessage', options ,(err, response) =>{
             data = response
     });

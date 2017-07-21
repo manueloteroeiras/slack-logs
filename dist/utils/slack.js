@@ -47,20 +47,25 @@ var sendMessage = function () {
             while (1) {
                 switch (_context.prev = _context.next) {
                     case 0:
-                        options = (0, _extends3.default)({}, defaultOptions, { text: "" + type + "\n```" + message + "```" });
+                        options = (0, _extends3.default)({}, defaultOptions, { text: message });
                         data = {};
+
+
+                        console.log('====================================');
+                        console.log(options);
+                        console.log('====================================');
 
                         slack.api('chat.postMessage', options, function (err, response) {
                             data = response;
                         });
 
-                        _context.next = 5;
+                        _context.next = 8;
                         return data;
 
-                    case 5:
+                    case 8:
                         return _context.abrupt('return', _context.sent);
 
-                    case 6:
+                    case 9:
                     case 'end':
                         return _context.stop();
                 }
