@@ -1,28 +1,45 @@
-# hapi-email-dispatch
+# hapi-dispatch
 
-In progress email dispatcher service GMAIL
+Slack Logs Dispatcher
 
 Methods
 
 ```
+method: GET
+
+path: /generate-token/:msg/:API_KEY/:SECRET_API_KEY
+
+response : ACCESS_TOKEN
+
+```
+
+```
 method: POST
-path: /send-email
+
+headers : x-access-token : ACCESS_TOKEN
+
+path: /send
 body : {
-  to: 'user@email.com'
-  subject: 'Important email'
-  text : 'some text to add' (optional)
-  name: 'username'
-  type : welcome || custom (future feature)
+  message : `string \n multiline`
 }
 ```
 
 You need node environments, creating `.env` file like this
 
 ```
-GMAIL_USER=user@gmail.com
-GMAIL_PASS=strongGmailPassword
-
 PORT=8000
+
+SLACK_API_TOKEN=xxxxxxx-xxxxxxxxxxxxxx-xxxxxxx
+
+WEBHOOK=https://www.slack-webhook.com
+
+DEV=true
+
+API_KEY=random-string
+
+SECRET_API_KEY=random-strong-string
+
+SECRET=jwt-secret-generation-string
 ```
 
 Then run `npm install`
