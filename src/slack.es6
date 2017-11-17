@@ -58,7 +58,7 @@ Phone : ${ order.user.phone || 'No tiene cel' }
 ${ JSON.stringify(order) }`
 
     slack.webhook({
-        channel: "#foodcloud-orders",
+        channel: "#foodcloud-logs",
         username: "foodcloud-logs",
         text: message
     },
