@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.welcomeMessage = exports.sendMessage = undefined;
 
+var _stringify = require('babel-runtime/core-js/json/stringify');
+
+var _stringify2 = _interopRequireDefault(_stringify);
+
 var _regenerator = require('babel-runtime/regenerator');
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
@@ -95,12 +99,52 @@ var sendMessage = function () {
     };
 }();
 
-var welcomeMessage = function () {
-    var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2() {
-        var data;
+var sendOrder = function () {
+    var _ref3 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee2(_ref4) {
+        var order = _ref4.order;
+        var data, message;
         return _regenerator2.default.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
+                    case 0:
+                        data = {};
+                        message = order.orderID + '\nUser : ' + order.user.email + '\nPhone : ' + (order.user.phone || 'No tiene cel') + '\n\n' + (0, _stringify2.default)(order);
+
+
+                        slack.webhook({
+                            channel: "#foodcloud-orders",
+                            username: "foodcloud-logs",
+                            text: message
+                        }, function (err, response) {
+                            console.log(response);
+                            data = response;
+                        });
+
+                        _context2.next = 5;
+                        return data;
+
+                    case 5:
+                        return _context2.abrupt('return', _context2.sent);
+
+                    case 6:
+                    case 'end':
+                        return _context2.stop();
+                }
+            }
+        }, _callee2, undefined);
+    }));
+
+    return function sendOrder(_x2) {
+        return _ref3.apply(this, arguments);
+    };
+}();
+
+var welcomeMessage = function () {
+    var _ref5 = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee3() {
+        var data;
+        return _regenerator2.default.wrap(function _callee3$(_context3) {
+            while (1) {
+                switch (_context3.prev = _context3.next) {
                     case 0:
                         data = {};
 
@@ -117,22 +161,22 @@ var welcomeMessage = function () {
                             data = response;
                         });
 
-                        _context2.next = 7;
+                        _context3.next = 7;
                         return data;
 
                     case 7:
-                        return _context2.abrupt('return', _context2.sent);
+                        return _context3.abrupt('return', _context3.sent);
 
                     case 8:
                     case 'end':
-                        return _context2.stop();
+                        return _context3.stop();
                 }
             }
-        }, _callee2, undefined);
+        }, _callee3, undefined);
     }));
 
     return function welcomeMessage() {
-        return _ref3.apply(this, arguments);
+        return _ref5.apply(this, arguments);
     };
 }();
 

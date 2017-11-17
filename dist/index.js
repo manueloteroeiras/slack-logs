@@ -85,6 +85,11 @@ app.post('/send', userAuth, function (req, res) {
     res.send("sended");
 });
 
+app.post('/send/order', userAuth, function (req, res) {
+    var response = (0, _slack.sendOrder)(req.body);
+    res.send("sended");
+});
+
 app.listen(PORT, function () {
     console.log('====================================');
     console.log("App it's running on Port: ", PORT);

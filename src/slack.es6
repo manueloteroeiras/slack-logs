@@ -39,7 +39,29 @@ const sendMessage = async ({message}) =>{
         channel: "#foodcloud-logs",
         username: "foodcloud-logs",
         text: message
-    }, 
+    },
+    function(err, response) {
+        console.log(response);
+        data = response
+    });
+
+    return await data
+}
+
+const sendOrder = async ({order}) =>{
+    let data = {}
+
+    let message = `${ order.orderID }
+User : ${ order.user.email }
+Phone : ${ order.user.phone || 'No tiene cel' }
+
+${ JSON.stringify(order) }`
+
+    slack.webhook({
+        channel: "#foodcloud-orders",
+        username: "foodcloud-logs",
+        text: message
+    },
     function(err, response) {
         console.log(response);
         data = response
@@ -58,7 +80,7 @@ const welcomeMessage = async () =>{
         channel: "#foodcloud-logs",
         username: "foodcloud-logs",
         text: "Welcome!"
-    }, 
+    },
     function(err, response) {
         console.log(response);
         data = response

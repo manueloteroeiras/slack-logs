@@ -5,7 +5,7 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-import { sendMessage, welcomeMessage } from './slack'
+import { sendMessage, welcomeMessage, sendOrder } from './slack'
 
 import config from './config'
 
@@ -25,22 +25,22 @@ const userAuth = (req, res, next)=>{
 
 	if (token) {
 
-		jwt.verify(token, config.secret, function(err, decoded) {      
-			if (err) return res.json({ success: false, message: 'Failed to authenticate token.' });    
-			
-            req.decoded = decoded;  
+		jwt.verify(token, config.secret, function(err, decoded) {
+			if (err) return res.json({ success: false, message: 'Failed to authenticate token.' });
+
+            req.decoded = decoded;
             console.log('====================================');
             console.log(decoded);
-            console.log('====================================');  
+            console.log('====================================');
             next();
-			
+
 		});
 
-	} 
+	}
 	else {
-		return res.status(403).send({ 
-			success: false, 
-			message: 'No token provided.' 
+		return res.status(403).send({
+			success: false,
+			message: 'No token provided.'
 		});
 
 	}
@@ -66,11 +66,16 @@ app.get('/generate-token/:msg/:API_KEY/:SECRET_API_KEY', (req, res)=>{
     else{
         res.send("User not allow!")
     }
-    
+
 })
 
 app.post('/send', userAuth ,(req, res)=>{
     let response = sendMessage(req.body);
+    res.send("sended")
+})
+
+app.post('/send/order', userAuth ,(req, res)=>{
+    let response = sendOrder(req.body);
     res.send("sended")
 })
 
