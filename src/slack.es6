@@ -28,7 +28,6 @@ let defaultOptions = {
 
 
 const sendMessage = async ({message}) =>{
-    let  options = { ...{}, ...defaultOptions, ...{ text: message } }
     let data = {}
 
     console.log('====================================');
@@ -51,14 +50,17 @@ const sendMessage = async ({message}) =>{
 const sendOrder = async ({order}) =>{
     let data = {}
 
+    // let mapLink = (order.deliveredMethod && order.deliveredMethod.address['type'] == 'jetSki' ) ? `https://www.google.com.ar/maps/place/${},${},17/@${},${},14z/data=!3m1!4b1` : null
+
     let message = `${ order.orderID }
-User : ${ order.user.email }
+User : ${ order.user.firstname } ${ order.user.lastname }
+Email : ${ order.user.email }
 Phone : ${ order.user.phone || 'No tiene cel' }
 
-${ JSON.stringify(order) }`
+Local : ${ order.subsidiary.name }`
 
     slack.webhook({
-        channel: "#foodcloud-logs",
+        channel: "#foodcloud-orders",
         username: "foodcloud-logs",
         text: message
     },

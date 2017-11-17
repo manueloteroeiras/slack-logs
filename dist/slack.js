@@ -5,17 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.sendOrder = exports.welcomeMessage = exports.sendMessage = undefined;
 
-var _stringify = require('babel-runtime/core-js/json/stringify');
-
-var _stringify2 = _interopRequireDefault(_stringify);
-
 var _regenerator = require('babel-runtime/regenerator');
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
-
-var _extends2 = require('babel-runtime/helpers/extends');
-
-var _extends3 = _interopRequireDefault(_extends2);
 
 var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
 
@@ -58,12 +50,11 @@ var defaultOptions = {
 var sendMessage = function () {
     var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(_ref2) {
         var message = _ref2.message;
-        var options, data;
+        var data;
         return _regenerator2.default.wrap(function _callee$(_context) {
             while (1) {
                 switch (_context.prev = _context.next) {
                     case 0:
-                        options = (0, _extends3.default)({}, defaultOptions, { text: message });
                         data = {};
 
 
@@ -80,13 +71,13 @@ var sendMessage = function () {
                             data = response;
                         });
 
-                        _context.next = 8;
+                        _context.next = 7;
                         return data;
 
-                    case 8:
+                    case 7:
                         return _context.abrupt('return', _context.sent);
 
-                    case 9:
+                    case 8:
                     case 'end':
                         return _context.stop();
                 }
@@ -108,11 +99,14 @@ var sendOrder = function () {
                 switch (_context2.prev = _context2.next) {
                     case 0:
                         data = {};
-                        message = order.orderID + '\nUser : ' + order.user.email + '\nPhone : ' + (order.user.phone || 'No tiene cel') + '\n\n' + (0, _stringify2.default)(order);
+
+                        // let mapLink = (order.deliveredMethod && order.deliveredMethod.address['type'] == 'jetSki' ) ? `https://www.google.com.ar/maps/place/${},${},17/@${},${},14z/data=!3m1!4b1` : null
+
+                        message = order.orderID + '\nUser : ' + order.user.firstname + ' ' + order.user.lastname + '\nEmail : ' + order.user.email + '\nPhone : ' + (order.user.phone || 'No tiene cel') + '\n\nLocal : ' + order.subsidiary.name;
 
 
                         slack.webhook({
-                            channel: "#foodcloud-logs",
+                            channel: "#foodcloud-orders",
                             username: "foodcloud-logs",
                             text: message
                         }, function (err, response) {
