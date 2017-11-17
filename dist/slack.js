@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.welcomeMessage = exports.sendMessage = undefined;
+exports.sendOrder = exports.welcomeMessage = exports.sendMessage = undefined;
 
 var _stringify = require('babel-runtime/core-js/json/stringify');
 
@@ -182,3 +182,4 @@ var welcomeMessage = function () {
 
 exports.sendMessage = sendMessage;
 exports.welcomeMessage = welcomeMessage;
+exports.sendOrder = sendOrder;
