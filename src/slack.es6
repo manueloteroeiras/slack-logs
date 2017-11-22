@@ -30,10 +30,6 @@ let defaultOptions = {
 const sendMessage = async ({message}) =>{
     let data = {}
 
-    console.log('====================================');
-    console.log(options);
-    console.log('====================================');
-
     slack.webhook({
         channel: "#foodcloud-logs",
         username: "foodcloud-logs",

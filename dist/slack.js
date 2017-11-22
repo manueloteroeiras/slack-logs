@@ -58,10 +58,6 @@ var sendMessage = function () {
                         data = {};
 
 
-                        console.log('====================================');
-                        console.log(options);
-                        console.log('====================================');
-
                         slack.webhook({
                             channel: "#foodcloud-logs",
                             username: "foodcloud-logs",
@@ -71,13 +67,13 @@ var sendMessage = function () {
                             data = response;
                         });
 
-                        _context.next = 7;
+                        _context.next = 4;
                         return data;
 
-                    case 7:
+                    case 4:
                         return _context.abrupt('return', _context.sent);
 
-                    case 8:
+                    case 5:
                     case 'end':
                         return _context.stop();
                 }
